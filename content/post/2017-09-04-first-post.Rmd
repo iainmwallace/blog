@@ -1,0 +1,22 @@
+---
+title: Setting up a blog using R
+author: Iain
+date: '2017-09-04'
+slug: first-post
+categories:
+  - R
+tags: []
+---
+
+Setting up your own blog is very easy using Rstudio and blogdown
+  
+Steps in setting up this site
+
+1. Install blogdown - devtools::install_github('rstudio/blogdown')
+2. For first site, install hugo - blogdown::install_hugo()
+3. modify links in config.toml
+4. blogdown::hugo_build() 
+5. create account on https://www.netlify.com/
+6. upload public folder
+7. optional: use netlify DNS to point to a custom domain (I use namecheap)  
+
