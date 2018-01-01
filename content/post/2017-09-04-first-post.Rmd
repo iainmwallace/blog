@@ -14,9 +14,10 @@ Steps in setting up this site
 
 1. Install blogdown - devtools::install_github('rstudio/blogdown')
 2. For first site, install hugo - blogdown::install_hugo()
-3. modify links in config.toml
-4. blogdown::hugo_build() 
+3. blogdown::hugo_build() 
+4. create site blogdown::new_site()
+5. modify links in config.toml
 5. create account on https://www.netlify.com/
 6. upload public folder
-7. optional: use netlify DNS to point to a custom domain (I use namecheap)  
-
+7. optional: used netlify DNS to point to a custom domain (I use namecheap)  
+8. optional: built site directly from github [CI details](https://bookdown.org/yihui/blogdown/netlify.html)
