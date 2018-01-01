@@ -9,7 +9,7 @@ tags:
   - sharing
 ---
 
-Sharing data via CSV files is a very common. An open question is how best to share what the columns and rows in the file mean, i.e. the metadata for data.  This context and meaning of the data in the CSV file in a variety of ways from e-mail to additional files. 
+Sharing data as a CSV file is *very* common. An open question is how best to share what the columns and rows in the file mean, i.e. the metadata for data.  This context and meaning of the data in the CSV file in a variety of ways from e-mail to additional files. 
 
 A recent discussion on twitter highlighted a number of different approaches to standardize the sharing of the csv metadata  
 
