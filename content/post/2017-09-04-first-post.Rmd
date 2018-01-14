@@ -19,5 +19,10 @@ Steps in setting up this site
 5. modify links in config.toml
 5. create account on https://www.netlify.com/
 6. upload public folder
+<<<<<<< HEAD
 7. optional: used netlify DNS to point to a custom domain (I use namecheap)  
 8. optional: built site directly from github [CI details](https://bookdown.org/yihui/blogdown/netlify.html)
+=======
+7. optional: use netlify DNS to point to a custom domain (I use namecheap)  
+8. optional: build site directly from github [CI details](https://bookdown.org/yihui/blogdown/netlify.html)
+>>>>>>> 79d5b350aeb874253efb75ff44e76bf27b0d8b31

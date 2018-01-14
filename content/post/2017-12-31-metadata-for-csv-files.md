@@ -9,9 +9,13 @@ tags:
   - sharing
 ---
 
+<<<<<<< HEAD
 We often share tabular data as a simple CSV file. It is **very** important that every data file has a corresponding description of what columns and rows in the file mean, otherwise it will be very difficult to understand the data.
 
 An open question is how best to create and share this description i.e. the metadata for data.
+=======
+Sharing data as a CSV file is *very* common. An open question is how best to share what the columns and rows in the file mean, i.e. the metadata for data.  This context and meaning of the data in the CSV file in a variety of ways from e-mail to additional files. 
+>>>>>>> 79d5b350aeb874253efb75ff44e76bf27b0d8b31
 
 A recent discussion on twitter highlighted a number of different approaches to standardize the sharing of the csv metadata  
 
