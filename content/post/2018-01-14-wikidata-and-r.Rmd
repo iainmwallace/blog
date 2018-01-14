@@ -1,0 +1,57 @@
+---
+title: WIkiData and R
+author: Iain Wallace
+date: '2018-01-14'
+slug: wikidata-and-r
+categories:
+  - R
+  - chemical biology
+tags:
+  - data
+  - sharing
+---
+
+
+[WikiData](https://www.wikidata.org/wiki/Wikidata:Main_Page) is a structured datasource that anyone can contribute to. The content of Wikidata is available under a free license, exported using standard formats, and can be interlinked to other open data sets on the linked data web.
+
+I am impressed in how useful it is for sharing scientific data in a structured manner *quickly*. WikiData provides a nice shortcut to standard mechanisms of sharing data. For example, a common workflow to create chemical biology datasets that link compounds to targets is for a curator to read interesting papers, extract data from the paper and then enter the data into a database. This introduces a significant lag from the publication of the data to the time that it is broadly accessible in machine readable format. 
+
+Some examples of wonderful resources that are created in this manner
+
+ * [Chembl](https://www.ebi.ac.uk/chembl/)
+ * [Guide to Pharmacology](http://www.guidetopharmacology.org/)
+ 
+```{r}
+library(WikidataQueryServiceR)
+
+## Example query against WikiData
+x<-query_wikidata('SELECT DISTINCT
+  ?genre ?genreLabel
+WHERE {
+  ?film wdt:P31 wd:Q11424.
+  ?film rdfs:label "The Cabin in the Woods"@en.
+  ?film wdt:P136 ?genre.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}')
+
+```
+
+
+The wikidata community is **very** welcoming. There is page to request queries [here]().
+
+Within 24hrs of posting a question on how to return all the chemical compounds in wikidat along with their chemcial structure, someone provided this statement.
+
+```{r}
+
+### return 
+smiles_strings<-'SELECT DISTINCT ?compound ?compoundLabel ?canonical_smiles
+   WHERE 
+   {
+    ?compound wdt:P233 ?canonical_smiles .
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+   }
+'
+
+```
+
+
