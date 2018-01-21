@@ -1,0 +1,79 @@
+---
+title: ElasticSearch bulk update and R
+author: Iain Wallace
+date: '2018-01-21'
+slug: elasticsearch-and-r
+categories: []
+tags: []
+---
+
+
+
+<div id="aim" class="section level3">
+<h3>Aim</h3>
+<p>Test the bulk update feature of the wonderful elastic search package <a href="https://github.com/ropensci/elastic/tree/bulk-update" class="uri">https://github.com/ropensci/elastic/tree/bulk-update</a></p>
+</div>
+<div id="install-elastic-search" class="section level2">
+<h2>Install elastic search</h2>
+<p>I installed elastic search locally on my windows machine from the (Elastic Search website)[<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html" class="uri">https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html</a>] using all the default options.</p>
+<p>After installation the server was available at <a href="http://localhost:9200/" class="uri">http://localhost:9200/</a></p>
+</div>
+<div id="install-r-packages" class="section level2">
+<h2>Install R packages</h2>
+<pre class="r"><code>#install.packages(&quot;curl&quot;)
+#devtools::install_github(&quot;ropensci/elastic@bulk-update&quot;)</code></pre>
+</div>
+<div id="set-up-index-with-data-set" class="section level2">
+<h2>Set up index with data set</h2>
+<pre class="r"><code>library(elastic)
+library(tidyverse)</code></pre>
+<pre><code>## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr</code></pre>
+<pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
+<pre><code>## count():   dplyr, elastic
+## explain(): dplyr, elastic
+## filter():  dplyr, stats
+## lag():     dplyr, stats</code></pre>
+<pre class="r"><code>connect(es_port = 9200)</code></pre>
+<pre><code>## transport:  http 
+## host:       127.0.0.1 
+## port:       9200 
+## path:       NULL 
+## username:   NULL 
+## password:   &lt;secret&gt; 
+## errors:     simple 
+## headers (names):  NULL</code></pre>
+<pre class="r"><code>df &lt;- data.frame(name = letters[1:3], size = 1:3, id = 100:102)
+
+invisible(docs_bulk(df, &#39;foobar&#39;, &#39;foobar&#39;, es_ids = FALSE))</code></pre>
+<pre><code>## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=================================================================| 100%</code></pre>
+<p>Index is available <a href="http://localhost:9200/foobar/foobar/101" class="uri">http://localhost:9200/foobar/foobar/101</a></p>
+</div>
+<div id="test-the-update-function" class="section level2">
+<h2>Test the update function</h2>
+<pre class="r"><code>df2 &lt;- data.frame(size = c(45, 56), id = 100:101)
+df2</code></pre>
+<pre><code>##   size  id
+## 1   45 100
+## 2   56 101</code></pre>
+<pre class="r"><code>cat(&#39;before update&#39;)</code></pre>
+<pre><code>## before update</code></pre>
+<pre class="r"><code>Search(&quot;foobar&quot;, asdf = TRUE)$hits$hits</code></pre>
+<pre><code>##   _index  _type _id _score _source.name _source.size _source.id
+## 1 foobar foobar 100      1            a            1        100
+## 2 foobar foobar 101      1            b            2        101
+## 3 foobar foobar 102      1            c            3        102</code></pre>
+<pre class="r"><code>#(docs_bulk_update(df2, index = &#39;foobar&#39;, type = &#39;foobar&#39;))
+#Search(&quot;foobar&quot;, asdf = TRUE)$hits$hits</code></pre>
+<p>Error using the docs_bulk_update</p>
+<p>docs_bulk_update(df2, index = ‘foobar’, type = ‘foobar’)</p>
+<p>Error: could not find function “docs_bulk_update”</p>
+</div>

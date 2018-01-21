@@ -1,0 +1,63 @@
+---
+title: ElasticSearch bulk update and R
+author: Iain Wallace
+date: '2018-01-21'
+slug: elasticsearch-and-r
+categories: []
+tags: []
+---
+
+### Aim
+
+Test the bulk update feature of the wonderful elastic search package
+https://github.com/ropensci/elastic/tree/bulk-update
+
+
+## Install elastic search
+I installed elastic search locally on my windows machine from the (Elastic Search website)[https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html] using all the default options.
+
+After installation the server was available at http://localhost:9200/
+
+## Install R packages
+```{r warning=FALSE}
+#install.packages("curl")
+#devtools::install_github("ropensci/elastic@bulk-update")
+```
+
+
+## Set up index with data set
+
+```{r warning=FALSE}
+library(elastic)
+library(tidyverse)
+
+connect(es_port = 9200)
+
+df <- data.frame(name = letters[1:3], size = 1:3, id = 100:102)
+
+invisible(docs_bulk(df, 'foobar', 'foobar', es_ids = FALSE))
+
+
+```
+
+Index is available http://localhost:9200/foobar/foobar/101
+
+## Test the update function
+
+```{r test docs_bulk_update}
+df2 <- data.frame(size = c(45, 56), id = 100:101)
+df2
+
+cat('before update')
+Search("foobar", asdf = TRUE)$hits$hits
+
+#(docs_bulk_update(df2, index = 'foobar', type = 'foobar'))
+#Search("foobar", asdf = TRUE)$hits$hits
+
+```
+
+Error using the docs_bulk_update
+
+docs_bulk_update(df2, index = 'foobar', type = 'foobar')
+
+Error: could not find function "docs_bulk_update"
